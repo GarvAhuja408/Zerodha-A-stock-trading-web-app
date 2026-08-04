@@ -4,8 +4,10 @@ import CreateTicket from './CreateTicket';
 
 function SupportPage() {
     return ( 
+        <div>
         <Hero/>
         <CreateTicket/>
+        </div>
      );
 }
 
