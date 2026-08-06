@@ -20,10 +20,6 @@ function RightSection({imageURL,productName,productDescription,learnMore}) {
                     </div>
 
                 </div>
-
-                <h3 className='text-center'>
-                    Want to know more about our technology stack? Check out the Zerodha.tech blog.
-                </h3>
         </div>
      );
 }
