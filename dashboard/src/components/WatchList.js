@@ -2,7 +2,7 @@ import React,{useState} from "react";
 
 // after material UI  npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 import {Tooltip,Grow} from '@mui/material';
-import {KeyboardArrowDown,KeyboardArrowUp} from '@mui/icons-material';
+import {BarChartOutlined, KeyboardArrowDown,KeyboardArrowUp, MoreHoriz} from '@mui/icons-material';
 
 import {watchlist} from '../data/data.js';
 
@@ -38,7 +38,7 @@ const WatchList = () => {
 export default WatchList;
 
 
-const WatchlistItem = ({stock,key})=>{
+const WatchlistItem = ({stock})=>{
 
     const[showWatchlistActions,setShowWatchlistActions]=useState(false);
 
@@ -60,6 +60,32 @@ const WatchlistItem = ({stock,key})=>{
                 <span className="percent">{stock.price}</span>
               </div>
           </div>
+          {showWatchlistActions && <Actions uid={stock.name}/> }
       </li>
+    )
+}
+
+const Actions = ({uid})=>{
+    return(
+      <span className="actions">
+        <span>
+
+          <Tooltip title="Buy" placement="top" arrow="true" TransitionComponent={Grow}>
+            <button className="buy">Buy</button>
+          </Tooltip>
+
+          <Tooltip title="Sell" placement="top" arrow="true" TransitionComponent={Grow}>
+            <button className="sell">Sell</button>
+          </Tooltip>
+
+          <button className="action"><BarChartOutlined className="icon"/></button>
+
+          
+          <Tooltip title="More" placement="top" arrow="true" TransitionComponent={Grow}>
+            <button className="action"><MoreHoriz className="icon"/></button>
+          </Tooltip>
+
+        </span>
+      </span>
     )
 }
