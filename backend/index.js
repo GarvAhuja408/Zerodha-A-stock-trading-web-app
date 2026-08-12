@@ -265,6 +265,18 @@ app.get('/allPositions',async(req,res)=>{
     res.json(allPositions);
 })
 
+app.post('/newOrder',async(req,res)=>{
+    let newOrder = new OrdersModel({
+        name:req.body.name,
+        qty:req.body.qty,
+        price:req.body.price,
+        mode:req.body.mode,
+    });
+
+    await newOrder.save();
+    res.send("order saved")
+})
+
 app.listen(PORT, () => {
     console.log(`App is listening on port ${PORT}`);
 });

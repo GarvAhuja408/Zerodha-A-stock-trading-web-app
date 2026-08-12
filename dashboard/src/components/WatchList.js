@@ -1,4 +1,5 @@
-import React,{useState} from "react";
+import React,{useState,useContext } from "react";
+import GeneralContext from "./GeneralContext";
 
 // after material UI  npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 import {Tooltip,Grow} from '@mui/material';
@@ -66,12 +67,15 @@ const WatchlistItem = ({stock})=>{
 }
 
 const Actions = ({uid})=>{
+
+    const { openBuyWindow } = useContext(GeneralContext);
+
     return(
       <span className="actions">
         <span>
 
           <Tooltip title="Buy" placement="top" arrow="true" TransitionComponent={Grow}>
-            <button className="buy">Buy</button>
+            <button className="buy" onClick={() => openBuyWindow(uid)}>Buy</button>
           </Tooltip>
 
           <Tooltip title="Sell" placement="top" arrow="true" TransitionComponent={Grow}>
