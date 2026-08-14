@@ -5,11 +5,19 @@ const mongoose = require("mongoose");
 
 const bodyParser = require('body-parser');
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const UsersModel = require("./schemas/UserSchema");
+
 
 const app = express();
 
 const PORT = process.env.PORT || 3002;
 const url = process.env.MONGO_URL;
+
+app.use(cookieParser());
 
 const HoldingsModel = require('./schemas/HoldingSchema');
 const PositionsModel = require('./schemas/PositionsSchema');
@@ -253,6 +261,92 @@ main()
 //     });
 //     res.send("saved");
 // });
+
+app.post("/signup",async(req,res)=>{
+    
+    try{
+
+    const{name,email,password}=req.body;
+
+    const userExists = await UsersModel.findOne({email});
+
+    if(userExists){
+        return res.status(400).json({
+            message:"User already exists"
+        });
+    }
+
+    const hashPassword = await bcrypt.hash(password,10);
+
+    const User = new UsersModel({
+        name:name,
+        email:email,
+        password:hashPassword,
+    });
+
+    await User.save();
+
+    res.status(201).json({
+         message: "Signup successful"
+    });
+
+}catch(err){
+    console.log(err);
+
+    res.status(500).json({
+        message:"signup failed"
+    });
+}
+})
+
+
+
+app.post("/login",async(req,res)=>{
+
+    try{
+
+    const {email,password}=req.body;
+
+    const user = await UsersModel.findOne({email});
+
+    if(!user){
+        res.status(401).json({
+            message:"Please register yourself"
+        })
+    }
+    const isMatch = await bcrypt.compare(password,user.password);
+
+    if(!isMatch){
+        res.status(401).json({
+            message:"Wrong email or password"
+        });
+    }
+
+    const token = jwt.sign(
+        {
+            userId:user._id,
+            email:user.email
+        },
+        process.env.JWT_SECRET,
+        {
+            expiresIn:"1d"
+        }
+    );
+
+    res.cookie("token",token);
+
+    res.json({
+        message:'Login successfull',
+        token
+    });
+
+}catch(err){
+    res.status(500).json({
+        message:"Login failed"
+    });
+}
+});
+
 
 
 app.get('/allHoldings',async(req,res)=>{
