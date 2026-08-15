@@ -1,7 +1,10 @@
 import React,{useState} from 'react';
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
 
+    const navigate = useNavigate();
+    
     const [formData,setFormData]=useState({
         name:"garv",
         email:"garv@gmail.com",
@@ -32,14 +35,19 @@ function SignUp() {
 
         if(response.ok){
             alert(data.message);
-
+            navigate("/login");
             setFormData({
                 name:"",
                 email:"",
                 password:""
             });
+            
         }else{
             alert(data.message);
+
+            if(data.message === "User already exists"){
+                    navigate("/login");
+                }
         }
     }catch(error){
         console.log(error);

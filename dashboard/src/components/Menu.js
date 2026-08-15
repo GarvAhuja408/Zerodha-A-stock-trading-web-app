@@ -1,12 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate} from "react-router-dom";
 
 const Menu = () => {
 
   const[selectedMenu,setSelectedMenu]= useState(0);
 
   const[isProfileDropdownOpen,setProfileDropdownOpen]= useState(false);
+
+  const navigate = useNavigate();
 
   const handleMenuClick = (index)=>{
     setSelectedMenu(index);
@@ -15,6 +17,20 @@ const Menu = () => {
   const handleProfileClick = (index)=>{
     setProfileDropdownOpen(!isProfileDropdownOpen);
   };
+
+  const handleLogout = async () => {
+
+    const response = await fetch("http://localhost:3002/logout", {
+        method: "POST",
+        credentials: "include"
+    });
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    window.location.href = "http://localhost:3001/login";
+};
 
   const menuClass = "menu";
   const activeMenuClass = "selected";
@@ -70,6 +86,7 @@ const Menu = () => {
             <Link to="/apps" style={{textDecoration:"none"}} onClick={ ()=>{handleMenuClick(6)}}>
             <p className={selectedMenu==6? activeMenuClass : menuClass}>Apps</p>
             </Link>
+            
 
           </li>
         </ul>
@@ -79,7 +96,15 @@ const Menu = () => {
           <div className="avatar">ZU</div>
           <p className="username">USERID</p>
         </div>
-        
+        {isProfileDropdownOpen && (
+          <div className="profile-dropdown">
+
+            <button onClick={handleLogout}>
+              Logout
+            </button>
+
+          </div>
+        )}
       </div>
     </div>
   );

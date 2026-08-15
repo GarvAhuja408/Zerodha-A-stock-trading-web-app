@@ -23,8 +23,17 @@ const HoldingsModel = require('./schemas/HoldingSchema');
 const PositionsModel = require('./schemas/PositionsSchema');
 const OrdersModel = require('./schemas/OrdersSchema');
 
-app.use(cors());
+app.use(cors({
+    origin:  [
+        "http://localhost:3000",
+        "http://localhost:3001"
+    ],
+    credentials: true
+    
+}));
 app.use(bodyParser.json());
+
+
 
 async function main() {
     await mongoose.connect(url);
@@ -310,14 +319,14 @@ app.post("/login",async(req,res)=>{
     const user = await UsersModel.findOne({email});
 
     if(!user){
-        res.status(401).json({
+        return res.status(401).json({
             message:"Please register yourself"
         })
     }
     const isMatch = await bcrypt.compare(password,user.password);
 
     if(!isMatch){
-        res.status(401).json({
+        return res.status(401).json({
             message:"Wrong email or password"
         });
     }
@@ -333,7 +342,11 @@ app.post("/login",async(req,res)=>{
         }
     );
 
-    res.cookie("token",token);
+    res.cookie("token", token, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax"
+    });
 
     res.json({
         message:'Login successfull',
@@ -349,27 +362,41 @@ app.post("/login",async(req,res)=>{
 
 
 
-app.get('/allHoldings',async(req,res)=>{
-    let allHoldings = await HoldingsModel.find({});
+app.get('/allHoldings', async (req, res) => {
+    const allHoldings = await HoldingsModel.find({});
     res.json(allHoldings);
-})
+});
 
-app.get('/allPositions',async(req,res)=>{
-    let allPositions = await PositionsModel.find({});
+app.get('/allPositions', async (req, res) => {
+    const allPositions = await PositionsModel.find({});
     res.json(allPositions);
-})
+});
 
-app.post('/newOrder',async(req,res)=>{
-    let newOrder = new OrdersModel({
-        name:req.body.name,
-        qty:req.body.qty,
-        price:req.body.price,
-        mode:req.body.mode,
+app.post('/newOrder', async (req, res) => {
+
+    const newOrder = new OrdersModel({
+        name: req.body.name,
+        qty: req.body.qty,
+        price: req.body.price,
+        mode: req.body.mode,
     });
 
     await newOrder.save();
-    res.send("order saved")
-})
+
+    res.send("order saved");
+});
+
+app.post("/logout", (req, res) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax"
+    });
+
+    res.json({
+        message: "Logout successful"
+    });
+});
 
 app.listen(PORT, () => {
     console.log(`App is listening on port ${PORT}`);

@@ -9,6 +9,7 @@ import AboutPage from './landing_page/about/Aboutpage';
 import ProductsPage from './landing_page/products/ProductsPage';
 import PricingPage from './landing_page/pricing/PricingPage';
 import SupportPage from './landing_page/support/SupportPage';
+import Login from './landing_page/login/login';
 
 // after react router npm i react-router-dom
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
@@ -23,6 +24,7 @@ root.render(
       <Routes>
           <Route path="/" element={<HomePage/>}></Route>
           <Route path="/signup" element={<SignUp/>}></Route>
+          <Route path="/login" element={<Login/>}></Route>
           <Route path="/about" element={<AboutPage/>}></Route>
           <Route path="/products" element={<ProductsPage/>}></Route>
           <Route path="/pricing" element={<PricingPage/>}></Route>
