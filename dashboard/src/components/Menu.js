@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { Link,useNavigate} from "react-router-dom";
 
+
+// dashboard on 3001 backend on 3002 frontend on 3000
+
 const Menu = () => {
 
   const[selectedMenu,setSelectedMenu]= useState(0);
@@ -18,18 +21,28 @@ const Menu = () => {
     setProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
-  const handleLogout = async () => {
+ const handleLogout = async () => {
 
-    const response = await fetch("http://localhost:3002/logout", {
-        method: "POST",
-        credentials: "include"
-    });
+    try {
 
-    const data = await response.json();
+        const response = await fetch("http://localhost:3002/logout", {
+            method: "POST",
+            credentials: "include"
+        });
 
-    alert(data.message);
+        const data = await response.json();
 
-    window.location.href = "http://localhost:3001/login";
+        if (response.ok) {
+            alert(data.message);
+            window.location.href = "http://localhost:3000/login";
+        }
+
+    } catch (error) {
+
+        console.log(error);
+        alert("Logout failed");
+
+    }
 };
 
   const menuClass = "menu";

@@ -387,10 +387,12 @@ app.post('/newOrder', async (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-    res.clearCookie("token", {
+
+    res.cookie("token", "", {
         httpOnly: true,
         secure: false,
-        sameSite: "lax"
+        sameSite: "lax",
+        expires: new Date(0)
     });
 
     res.json({

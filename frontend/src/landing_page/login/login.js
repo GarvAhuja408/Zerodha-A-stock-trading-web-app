@@ -15,6 +15,7 @@ function Login() {
     };
 
     const handleSubmit = async (event) => {
+
         event.preventDefault();
 
         try {
@@ -34,7 +35,7 @@ function Login() {
 
                 alert(data.message);
 
-                window.location.href = "http://localhost:3000";
+                window.location.href = "http://localhost:3001";
 
             } else {
 
@@ -51,35 +52,80 @@ function Login() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div
+            style={{
+                minHeight: "70vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}
+        >
 
-            <input
-                type="text"
-                placeholder="Enter email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-            />
+            <form
+                onSubmit={handleSubmit}
+                style={{
+                    width: "400px",
+                    padding: "35px",
+                    border: "1px solid #ddd",
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 15px rgba(0,0,0,0.08)",
+                    backgroundColor: "white"
+                }}
+            >
 
-            <br />
-            <br />
+                <h2 className="text-center mb-2">
+                    Welcome Back
+                </h2>
 
-            <input
-                type="password"
-                placeholder="Enter password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-            />
+                <p className="text-center text-muted mb-4">
+                    Login to your Zerodha account
+                </p>
 
-            <br />
-            <br />
+                <input
+                    type="email"
+                    className="form-control mb-3"
+                    placeholder="Enter email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                />
 
-            <button type="submit">
-                Login
-            </button>
+                <input
+                    type="password"
+                    className="form-control mb-4"
+                    placeholder="Enter password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                />
 
-        </form>
+                <button
+                    type="submit"
+                    className="btn btn-primary w-100"
+                >
+                    Login
+                </button>
+
+                <p className="text-center mt-4 mb-0">
+                    Don't have an account?{" "}
+
+                    <span
+                        style={{
+                            color: "#387ed1",
+                            cursor: "pointer",
+                            fontWeight: "500"
+                        }}
+                        onClick={() => {
+                            window.location.href = "http://localhost:3000/signup";
+                        }}
+                    >
+                        Sign Up
+                    </span>
+                </p>
+
+            </form>
+
+        </div>
     );
 }
 
