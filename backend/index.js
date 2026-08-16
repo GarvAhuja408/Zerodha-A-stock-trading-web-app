@@ -23,17 +23,25 @@ const HoldingsModel = require('./schemas/HoldingSchema');
 const PositionsModel = require('./schemas/PositionsSchema');
 const OrdersModel = require('./schemas/OrdersSchema');
 
+const allowedOrigins = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    process.env.FRONTEND_URL,
+    process.env.DASHBOARD_URL
+];
+
 app.use(cors({
-    origin:  [
-        "http://localhost:3000",
-        "http://localhost:3001"
-    ],
+    origin: function (origin, callback) {
+
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+
+    },
     credentials: true
-    
 }));
-app.use(bodyParser.json());
-
-
 
 async function main() {
     await mongoose.connect(url);
@@ -344,13 +352,12 @@ app.post("/login",async(req,res)=>{
 
     res.cookie("token", token, {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax"
-    });
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+});
 
     res.json({
-        message:'Login successfull',
-        token
+    message: "Login successful"
     });
 
 }catch(err){
@@ -388,12 +395,12 @@ app.post('/newOrder', async (req, res) => {
 
 app.post("/logout", (req, res) => {
 
-    res.cookie("token", "", {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        expires: new Date(0)
-    });
+   res.cookie("token", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    expires: new Date(0)
+});
 
     res.json({
         message: "Logout successful"
