@@ -18,7 +18,7 @@ function Awards() {
                         <li><p>Commodity</p></li>
                         <li><p>Currency</p></li>
                     </ul>
-                    <img src="/media/pressLogos.PNG" alt='press Logo' className="mt-5" style={{width:"80%"}}></img>
+                    <img src="/media/pressLogos.png" alt='press Logo' className="mt-5" style={{width:"80%"}}></img>
                 </div>
 
             </div>
