@@ -12,7 +12,7 @@ function Team() {
             <div className='row '>
                 
                 <div className='col-6 p-3 text-center'>
-                    <img src="/media/nk.png" alt="Founder"></img>
+                    <img src="/media/nk.PNG" alt="Founder"></img>
                     <h4 className='mt-3'>Nithin Kamath</h4>
                     <h6 className='mt-3'>Founder, CEO</h6>
                 </div>

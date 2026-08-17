@@ -7,7 +7,7 @@ function Footer() {
             <div className='row mt-5'>
 
                 <div className='col'>
-                    <img src="media/logooo.png" alt='logo'></img>
+                    <img src="/media/logooo.PNG" alt='logo'></img>
                     <p> ©2010 - 2026, Zerodha Broking Ltd.All rights reserved.</p>
                 </div>
                 <div className='col'>

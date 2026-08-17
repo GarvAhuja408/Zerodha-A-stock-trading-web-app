@@ -10,7 +10,7 @@ function Universe() {
                     <p>Extend your trading and investment experience even further with our partner platforms</p>
 
                     <div className='col-4 p-5'>
-                        <img src="/media/one.png"/>
+                        <img src="/media/one.PNG"/>
                         <p>Our asset management venture
                         that is creating simple and transparent index
                         funds to help you save for your goals.
@@ -18,7 +18,7 @@ function Universe() {
                     </div>
 
                     <div className='col-4 p-5'>
-                        <img src="/media/2.png"/>
+                        <img src="/media/2.PNG"/>
                         <p>Options trading platform that lets you
                         create strategies, analyze positions, and examine
                         data points like open interest, FII/DII, and more.
@@ -26,14 +26,14 @@ function Universe() {
                     </div>
 
                     <div className='col-4 p-5'>
-                        <img src="/media/3.png"/>
+                        <img src="/media/3.PNG"/>
                         <p>Investment research platform
                         that offers detailed insights on stocks,
                         sectors, supply chains, and more.</p>
                     </div>
 
                     <div className='col-4 p-5'>
-                        <img src="/media/4.png"/>
+                        <img src="/media/4.PNG"/>
                         <p>Systematic trading platform
                         that allows you to create and backtest
                         strategies without coding.</p>
@@ -41,14 +41,14 @@ function Universe() {
 
 
                     <div className='col-4 p-5'>
-                        <img src="/media/5.png"/>
+                        <img src="/media/5.PNG"/>
                         <p>Thematic investing platform
                         that helps you invest in diversified
                         baskets of stocks on ETFs.</p>
                     </div>
 
                     <div className='col-4 p-5'>
-                        <img src="/media/6.png"/>
+                        <img src="/media/6.PNG"/>
                         <p>Personalized advice on life
                         and health insurance. No spam
                         and no mis-selling.

@@ -6,7 +6,7 @@ function Education() {
             <div className='row mt-5'>
 
                 <div className='col-6'>
-                    <img src="media/varsityy.png" alt='varsity image'/>
+                    <img src="/media/varsityy.PNG" alt='varsity image'/>
                 </div>
 
                 <div className='col-6'>

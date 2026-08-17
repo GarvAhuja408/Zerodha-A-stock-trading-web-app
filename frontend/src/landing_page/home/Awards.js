@@ -6,7 +6,7 @@ function Awards() {
             <div className='row'>
 
                 <div className='col-6 mt-5'>
-                    <img src='/media/awards.png' alt="awards image"/>
+                    <img src='/media/awards.PNG' alt="awards image"/>
                 </div>
 
                 <div className='col-6 mt-5'>
@@ -18,7 +18,7 @@ function Awards() {
                         <li><p>Commodity</p></li>
                         <li><p>Currency</p></li>
                     </ul>
-                    <img src="media/pressLogos.png" alt='press Logo' className="mt-5" style={{width:"80%"}}></img>
+                    <img src="/media/pressLogos.PNG" alt='press Logo' className="mt-5" style={{width:"80%"}}></img>
                 </div>
 
             </div>
