@@ -84,7 +84,7 @@ const Holdings = () => {
                 <td>{currVal}</td>
                 <td className={profClass}>{(currVal-stock.avg+stock.qty).toFixed(2)}</td>
                 <td className={profClass}>{stock.net}</td>
-                <td className={profClass}>{stock.day}</td>
+                <td className={dayClass}>{stock.day}</td>
               </tr>
             )
           })}
