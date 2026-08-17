@@ -24,7 +24,7 @@ const Menu = () => {
 
     try {
 
-        const response = await fetch("http://localhost:3002/logout", {
+        const response = await fetch("https://zerodha-backend-c87q.onrender.com/logout", {
             method: "POST",
             credentials: "include"
         });
@@ -33,7 +33,7 @@ const Menu = () => {
 
         if (response.ok) {
             alert(data.message);
-            window.location.href = "http://localhost:3000/login";
+            window.location.href = "https://zerodha-backend-c87q.onrender.com/login";
         }
 
     } catch (error) {
