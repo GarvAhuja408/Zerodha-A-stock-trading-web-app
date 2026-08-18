@@ -35,7 +35,7 @@ function Login() {
 
                 alert(data.message);
 
-                window.location.href = "http://localhost:3001";
+                window.location.href = "https://zerodha-dashboard-garv15.vercel.app";
 
             } else {
 
@@ -116,7 +116,7 @@ function Login() {
                             fontWeight: "500"
                         }}
                         onClick={() => {
-                            window.location.href = "http://localhost:3000/signup";
+                            window.location.href = "/signup";
                         }}
                     >
                         Sign Up
