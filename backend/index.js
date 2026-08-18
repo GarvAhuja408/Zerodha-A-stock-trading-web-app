@@ -29,7 +29,7 @@ const allowedOrigins = [
     "http://localhost:3001",
     process.env.FRONTEND_URL,
     process.env.DASHBOARD_URL
-];
+].filter(Boolean);
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -37,6 +37,7 @@ app.use(cors({
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
+            console.log("Blocked CORS origin:", origin);
             callback(new Error("Not allowed by CORS"));
         }
 
@@ -352,10 +353,10 @@ app.post("/login",async(req,res)=>{
     );
 
     res.cookie("token", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
-});
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+    });
 
     res.json({
     message: "Login successful"
@@ -397,15 +398,19 @@ app.post('/newOrder', async (req, res) => {
 app.post("/logout", (req, res) => {
 
    res.cookie("token", "", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    expires: new Date(0)
-});
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        expires: new Date(0)
+    });
 
     res.json({
         message: "Logout successful"
     });
+});
+
+app.get("/", (req, res) => {
+    res.send("Backend is running");
 });
 
 app.listen(PORT, () => {
